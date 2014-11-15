@@ -87,6 +87,11 @@ body{
 	color: #634f84;
 }
 
+.message{
+	font-family: 'Josefin Slab', serif;
+	color: #634f84;
+}
+
 .submit{
 	padding-top: 10px;
 	padding-bottom: 110px;

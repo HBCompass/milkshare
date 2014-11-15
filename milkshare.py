@@ -2,7 +2,7 @@ from flask import Flask, request, render_template, make_response
 from flask import redirect, url_for, session, g, flash
 import jinja2
 import model
-
+from datetime import datetime
 
 app = Flask(__name__)
 app.secret_key = 'boobs'
@@ -68,8 +68,20 @@ def log_out():
     return render_template("home.html")
 
 
-@app.route("/createacct")
+@app.route("/createacct", methods=['POST'])
 def create_acct():
+    first = request.form.get("first_name")
+    last = request.form.get("last_name")
+    email_in = request.form.get("email")
+    password_in = request.form.get("password")
+
+    u = model.User()
+    u.first_name = first
+    u.last_name = last
+    u.email = email_in
+    u.password = password_in
+    model.session.add(u)
+    model.session.commit
     return render_template("createacct.html")
 
 
@@ -95,14 +107,30 @@ def donor_profile(user_id):
 @app.route("/users/<int:user_id>/messages/")
 def private_message(user_id):
     user = model.get_user_by_id(user_id)
+    session['lookingat_id'] = user.id
     return render_template("message.html",user=user)
 
-@app.route("/sendmessage")
+@app.route("/sendmessage", methods=['POST'])
 def send_message():
-    return render_template()
+    inmessage = request.form.get("inputmessage")
+    senderid = session['id']
+    recipientid = session['lookingat_id']
+    insubject = request.form.get("subject")
+
+    m = model.Message()
+    m.sender_id = senderid
+    m.recipient_id = recipientid
+    m.date = datetime.strptime(str(datetime.now()).split()[0], "%Y-%m-%d")
+    m.subject = insubject
+    m.message = inmessage
+    model.session.add(m)
+    model.session.commit()
+
+    return redirect(url_for("milk_exchange_board"))
 
 @app.route("/newpost")
 def new_post():
+    
     return render_template()
 
 
