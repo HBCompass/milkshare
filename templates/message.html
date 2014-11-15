@@ -10,8 +10,15 @@
 Write a message to a donor
 -->
 
+<form action="action_page.php">
+	<fieldset>
+	<legend>Private Message:</legend>
+	To Donor:{{user.first_name}} {{user.last_name}} <br>
+	Message:<br>
+	<input type="textarea">
+	<br><br>
+	<input type="submit" value="Submit"></fieldset>
+</form>
 
-	<div>
-	</div>
 
 {% endblock %}

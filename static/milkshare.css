@@ -54,11 +54,16 @@ body{
 }
 
 .edit-profile{
-	padding-left: 150px;
+	
 }
 
-.edit-label{
+.editlabel{
 	font-family: 'Josefin Slab', serif;
 	text-align: center;
+	color: #634f84;
+}
+
+.yourprofile{
+	font-family: 'Josefin Slab', serif;
 	color: #634f84;
 }

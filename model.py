@@ -41,7 +41,7 @@ class User(Base):
     notes = Column(Text, nullable=True)
 
 def get_user_by_email(email, password):
-    user = session.query(User).filter(email=email).first()
+    user = session.query(User).filter_by(email=email).first()
     if user:
         if user.password != password:
             return "incorrect password"
@@ -80,7 +80,11 @@ class Message(Base):
     recipient = relationship("User", foreign_keys = 'Message.recipient_id', backref=backref("recieved_messages", order_by=id))
 
 ### End class declarations
+def get_sent_messages(my_id):
+    return session.query(Message).filter_by(sender_id=my_id)
 
+def get_received_messages(my_id):
+    return session.query(Message).filter_by(recipient_id=my_id)
 
 def main():
     Base.metadata.create_all(engine)
