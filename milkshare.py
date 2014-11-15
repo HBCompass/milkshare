@@ -65,7 +65,6 @@ def dashboard():
 @app.route("/logout")
 def log_out():
     session.clear()
-    #session['logged_in'] = False
     return render_template("home.html")
 
 
@@ -85,23 +84,26 @@ def editprofile():
 
 @app.route("/milkexchange")
 def milk_exchange_board():
-
     all_posts = model.get_posts()
-    #return render_template("stupid.html", all_posts=all_posts)
     return render_template("donorlist.html", all_posts=all_posts)
 
-@app.route("/message")
-def private_message():
+@app.route("/users/<int:user_id>")
+def donor_profile(user_id):
+    user = model.get_user_by_id(user_id)
+    return render_template("donorprofile.html",user=user)
 
-    return render_template("message.html")
+@app.route("/users/<int:user_id>/messages/")
+def private_message(user_id):
+    user = model.get_user_by_id(user_id)
+    return render_template("message.html",user=user)
 
-@app.route("/donorprofile")
-def donor_profile():
-    return render_template("donorprofile.html")
+@app.route("/sendmessage")
+def send_message():
+    return render_template()
 
-#@app.route("/users/<>")
-#def donor_profile():
-#    return render_template("donorprofile.html")
+@app.route("/newpost")
+def new_post():
+    return render_template()
 
 
 if __name__ == "__main__":

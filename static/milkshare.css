@@ -11,6 +11,16 @@ body{
 	border-color: #FFF;
 }*/
 
+.navbar-inverse .navbar-nav>li{
+	color:#FFF;
+	display: inline-block;
+}
+
+.navbar-inverse .navbar-nav>li>a{
+	color:#FFF;
+	display: inline-block;
+}
+
 .navbar {
    background-color: transparent;
    background: transparent;
@@ -66,4 +76,32 @@ body{
 .yourprofile{
 	font-family: 'Josefin Slab', serif;
 	color: #634f84;
+}
+
+.donorprofile{
+	font-family: 'Josefin Slab', serif;
+	color: #634f84;
+}
+
+.submit{
+	padding-top: 10px;
+	padding-bottom: 110px;
+}
+
+.textarea{
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.welcome{
+	font-family: 'Josefin Slab', serif;
+	color: #634f84;
+	text-align: center;
+}
+
+.main-menu{
+	font-family: 'Josefin Slab', serif;
+	color: #634f84;
+	text-align: center;
+	padding-top: 50px;
 }
