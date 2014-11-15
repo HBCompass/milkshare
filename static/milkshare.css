@@ -114,3 +114,12 @@ body{
 	text-align: center;
 	padding-top: 50px;
 }
+
+.tagline{
+	font-family: 'Josefin Slab', serif;
+	color: #634f84;
+	text-align: center;
+	padding-top: 50px;
+	font-style: italic;
+	font-size: 30px;
+}
