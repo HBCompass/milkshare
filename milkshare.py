@@ -5,7 +5,7 @@ import model
 
 
 app = Flask(__name__)
-secret_key = 'boobs'
+app.secret_key = 'boobs'
 
 
 @app.route("/")
@@ -15,6 +15,7 @@ def testthings():
 
 @app.route("/login")
 def show_login():
+    print "showing log in"
     return render_template("home.html")
 
 
@@ -23,23 +24,46 @@ def show_main():
     return render_template("main.html")
 
 
+@app.route("/tryother")
+def try_other():
+    return render_template("crap.html")
+
 @app.route("/login", methods=['POST'])
 def actually_login():
+    print "something else"
     email = request.form.get("email")
     password = request.form.get("password")
-    user = model.get_user_by_email(email)
-    if user == None:
+    print password
+    #user = model.session.query(model.User).filter_by(email=temail).first()
+    
+    user = model.get_user_by_email(email, password)
+
+    if user is None:
+        print "none"
         flash("User does not exist")
         return redirect(url_for('actually_login'))
-    #elif (password != customer)
+    #elif user.password != password:
+    elif user == "incorrect password":
+        flash("Incorrect password")
+        print "incorrectpw"
+        return redirect(url_for('actually_login'))
     else:
         session['email'] = user.email
-    return render_template("home.html")
+        session['id'] = user.id
+        session['logged_in'] = True
+        print "loggedin???"
+    return redirect(url_for("dashboard"))
+
+@app.route("/dashboard")
+def dashboard():
+    return render_template("main.html")
 
 
 @app.route("/logout")
 def log_out():
-    return 
+    session.clear()
+    #session['logged_in'] = False
+    return render_template("home.html")
 
 
 @app.route("/createacct")
@@ -47,14 +71,21 @@ def create_acct():
     return render_template("createacct.html")
 
 
-@app.route("/userprofile")
-def account():
-    return render_template("userprofile.html")
+@app.route("/myprofile")
+def myprofile():
+    user_info = get_user_by_id(session['id'])
+    return render_template("userprofile.html", user_info=user_info)
 
+@app.route("/editprofile")
+def editprofile():
+    return render_template("edituserprofile.html")
 
+@app.route("/milkexchange")
+def milk_exchange_board():
 
-
-
+    all_posts = model.get_posts()
+    return render_template("stupid.html", all_posts=all_posts)
+    #return render_template("donorlist.html", all_posts=all_posts)
 
 if __name__ == "__main__":
     app.run(debug=True)
