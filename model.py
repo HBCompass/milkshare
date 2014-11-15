@@ -40,6 +40,14 @@ class User(Base):
     about_me = Column(Text, nullable=True)
     notes = Column(Text, nullable=True)
 
+def get_user_by_email(email, password):
+    user = session.query(User).filter(email=email).first()
+    if user:
+        if user.password != password:
+            return "incorrect password"
+    return user
+
+
 class Post(Base):
     __tablename__ = "posts"
 
@@ -53,6 +61,9 @@ class Post(Base):
 
     user = relationship("User", backref=backref("posts", order_by=id))
 
+def get_posts():
+    return session.query(Post).all()
+
 class Message(Base):
     __tablename__ = "messages"
 
@@ -63,8 +74,8 @@ class Message(Base):
     subject = Column(String(200), nullable=True)
     message = Column(Text, nullable=False)
 
-    sender = relationship("User", backref=backref("sent_messages", order_by=id))
-    recipient = relationship("User", backref=backref("recieved_messages", order_by=id))
+    sender = relationship("User", foreign_keys = 'Message.sender_id', backref=backref("sent_messages", order_by=id))
+    recipient = relationship("User", foreign_keys = 'Message.recipient_id', backref=backref("recieved_messages", order_by=id))
 
 ### End class declarations
 
