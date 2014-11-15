@@ -1,3 +1,7 @@
 body{
+	background-image: "/static/img/milkshare-blank-sfw.jpg";
+}
+
+home.body{
 	background-image: "/static/img/home-baby-v1-sfw.jpg";
 }
