@@ -48,3 +48,7 @@ body{
 	text-align: center;
 	color: #634f84;
 }
+
+.textarea{
+	width:200px;
+}
