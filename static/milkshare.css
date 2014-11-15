@@ -52,3 +52,13 @@ body{
 .textarea{
 	width:200px;
 }
+
+.edit-profile{
+	padding-left: 150px;
+}
+
+.edit-label{
+	font-family: 'Josefin Slab', serif;
+	text-align: center;
+	color: #634f84;
+}

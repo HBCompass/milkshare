@@ -9,9 +9,12 @@
 <!-- 
 Where a user edits their profile
 -->
-
-<div>
+<div class="col-md-3"></div>
+<div class="col-md-7">
 	<div><form class="edit-profile" method="POST">
+		<div class="editlabel">
+			<h3> Edit Your Profile </h3>
+		</div>
 		<div class="form-group"><label for="first_name"></label>
 			<input type = "text" name ="first_name" id="first_name" class="form-control" placeholder="First Name"/></div>
 		<div class="form-group"><label for="last_name"></label>
@@ -48,18 +51,10 @@ Where a user edits their profile
     	<textarea id="textarea" name="textarea" rows="3">Any additional information to share?</textarea>
   		</div></div>
 
-
-
-	</div>
-</div>
-		
-		
 		<div class="form-group"><input class="btn btn-default" type="submit" value="Submit" id="signup-submit"></div>
-		</form></div>
+	</form></div>
+
 	</div>
-
-baby_dob - Dropdown
-
-
-
+<div class="col-md-2"></div>
+		
 {% endblock %}
